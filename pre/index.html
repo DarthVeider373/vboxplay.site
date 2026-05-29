@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Desatadora de Nós</title>
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+  <script>
+    window.googlePixelId = "6a08f04f5b5c4ce4887ab26b";
+
+    (() => {
+      const pixelScript = document.createElement("script");
+      pixelScript.async = true;
+      pixelScript.defer = true;
+      pixelScript.src = "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js";
+      document.head.appendChild(pixelScript);
+    })();
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold-bg-start: #c9920a;
+      --gold-bg-end: #8b6000;
+      --brown-dark: #5a3a00;
+      --brown-text: #1a1008;
+      --gold-soft: #f5d98a;
+      --gold-button-1: #e8a800;
+      --gold-button-2: #f5c518;
+      --gold-button-3: #d49200;
+      --paper: #fffef7;
+      --white: #ffffff;
+      --text-dark: #2c1b09;
+      --muted: #777777;
+      --shadow-strong: rgba(0, 0, 0, 0.45);
+      --shadow-gold: rgba(180, 120, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(ellipse at center, var(--gold-bg-start) 0%, var(--gold-bg-end) 100%);
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      padding: 22px 16px 38px;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .page {
+      width: 100%;
+      display: grid;
+      justify-items: center;
+    }
+
+    .prayer-card {
+      width: min(100%, 420px);
+      overflow: hidden;
+      position: relative;
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px var(--shadow-strong);
+    }
+
+    .prayer-card__image {
+      width: 64%;
+      max-width: 230px;
+      height: auto;
+      display: block;
+      margin: 14px auto 6px;
+      border-radius: 12px;
+    }
+
+    .image-fallback {
+      width: 100%;
+      height: 220px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(160deg, #f5d98a 0%, #c9920a 100%);
+    }
+
+    .image-fallback span {
+      font-size: 90px;
+      opacity: 0.6;
+    }
+
+    .ribbon {
+      min-height: 39px;
+      padding: 10px 20px;
+      color: var(--gold-soft);
+      background: linear-gradient(90deg, var(--brown-dark), var(--gold-bg-end), var(--brown-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .ribbon__icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .prayer-card__body {
+      background: var(--paper);
+      padding: 24px 22px 28px;
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+
+    .title {
+      margin: 0;
+      max-width: 100%;
+      color: var(--brown-text);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(24px, 6vw, 30px);
+      font-weight: 900;
+      line-height: 1.18;
+      text-align: center;
+    }
+
+    .title em {
+      color: var(--gold-bg-end);
+      font-style: italic;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--gold-bg-end);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    .button-primary {
+      width: 100%;
+      border: 0;
+      border-radius: 50px;
+      padding: 17px 20px;
+      color: var(--brown-text);
+      background: linear-gradient(135deg, var(--gold-button-1), var(--gold-button-2), var(--gold-button-3));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 5px 18px var(--shadow-gold);
+      animation: pulseGlow 2.4s ease-in-out infinite;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(180, 120, 0, 0.7);
+    }
+
+    .button-primary:active {
+      transform: translateY(0);
+    }
+
+    .access-note {
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .site-footer {
+      margin-top: 24px;
+      padding: 0 10px;
+      color: rgba(255, 255, 255, 0.72);
+      text-align: center;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .site-footer a {
+      color: rgba(255, 255, 255, 0.95);
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      padding: 18px;
+      background: rgba(0, 0, 0, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.is-open {
+      display: flex;
+    }
+
+    .modal__dialog {
+      width: min(100%, 720px);
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--paper);
+      border: 2px solid var(--gold-button-2);
+      border-radius: 22px;
+      box-shadow: 0 20px 70px var(--shadow-strong);
+      animation: modalEntrance 250ms ease;
+    }
+
+    .modal__topbar {
+      padding: 18px 22px;
+      color: var(--gold-soft);
+      background: linear-gradient(90deg, var(--brown-dark), var(--gold-bg-end), var(--brown-dark));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .modal__title {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .modal__close {
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .modal__content {
+      padding: 24px 24px 28px;
+      color: var(--text-dark);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .modal__content h3 {
+      margin: 18px 0 8px;
+      color: var(--gold-bg-end);
+      font-size: 17px;
+    }
+
+    .modal__content p {
+      margin: 0 0 12px;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 5px 18px rgba(180, 120, 0, 0.45);
+      }
+
+      50% {
+        box-shadow: 0 5px 30px rgba(180, 120, 0, 0.8);
+      }
+    }
+
+    @keyframes modalEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 10px 28px;
+      }
+
+      .prayer-card {
+        width: 100%;
+        border-radius: 20px;
+      }
+
+      .prayer-card__image {
+        width: 52%;
+        max-width: 165px;
+        margin: 10px auto 4px;
+      }
+
+      .ribbon {
+        padding: 8px 14px;
+        font-size: 11px;
+      }
+
+      .prayer-card__body {
+        padding: 18px 18px 24px;
+        gap: 10px;
+      }
+
+      .title {
+        font-size: 22px;
+        line-height: 1.12;
+      }
+
+      .subtitle {
+        font-size: 10px;
+        letter-spacing: 1.8px;
+      }
+
+      .button-primary {
+        padding: 15px 18px;
+        font-size: 16px;
+      }
+
+      .access-note {
+        font-size: 12px;
+      }
+
+      .site-footer {
+        margin-top: 18px;
+        font-size: 10px;
+        line-height: 1.8;
+      }
+
+      .modal__title {
+        font-size: 21px;
+      }
+
+      .modal__content {
+        padding: 20px;
+        font-size: 13.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="prayer-card" aria-label="Desatadora de Nós">
+      <img class="prayer-card__image" src="./images/nossa-senhora-desatadora.jpg" alt="Desatadora de Nós" data-fallback="true" />
+
+      <div class="ribbon">
+        <span class="ribbon__icon">✨</span>
+        <span>DESATADORA DE NÓS</span>
+        <span class="ribbon__icon">✨</span>
+      </div>
+
+      <div class="prayer-card__body">
+        <h1 class="title">
+          Escute essa <em>oração<br />de 7 palavras</em>
+        </h1>
+
+        <p class="subtitle">Clique abaixo e Ouça agora</p>
+
+        <a href="../vsl-2/" class="button-primary" id="cta-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"></path>
+          </svg>
+          <span>Ouvir Agora</span>
+        </a>
+
+        <div class="access-note">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#8b6000" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+          </svg>
+          <span>Acesso imediato e gratuito</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      © 2026 Desatadora de Nós. Todos os direitos reservados.<br />
+      <a href="#" data-modal-open="termos">Termos de Uso</a>
+      ·
+      <a href="#" data-modal-open="privacidade">Política de Privacidade</a>
+    </footer>
+  </main>
+
+  <div class="modal" id="legal-modal" aria-hidden="true">
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+      <div class="modal__topbar">
+        <h2 class="modal__title" id="modal-heading">Termos de Uso</h2>
+        <button class="modal__close" type="button" data-modal-close aria-label="Fechar">×</button>
+      </div>
+
+      <div class="modal__content" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const pageContent = {
+        termos: {
+          title: "Termos de Uso",
+          html: `
+            <p>Ao acessar esta página, você concorda com os presentes Termos de Uso.</p>
+
+            <h3>1. Finalidade do Conteúdo</h3>
+
+            <p>O conteúdo apresentado possui finalidade informativa, espiritual e devocional.</p>
+
+            <h3>2. Uso da Página</h3>
+
+            <p>Você se compromete a utilizar esta página de forma adequada.</p>
+
+            <h3>3. Responsabilidade</h3>
+
+            <p>Esta página não substitui orientação profissional.</p>
+          `
+        },
+        privacidade: {
+          title: "Política de Privacidade",
+          html: `
+            <p>A sua privacidade é importante para nós.</p>
+
+            <h3>1. Coleta de Informações</h3>
+
+            <p>Podemos coletar dados básicos de navegação para melhorar a experiência.</p>
+
+            <h3>2. Cookies</h3>
+
+            <p>Cookies podem ser utilizados para análise de desempenho e campanhas.</p>
+
+            <h3>3. Segurança</h3>
+
+            <p>Adotamos medidas razoáveis para proteger as informações.</p>
+          `
+        }
+      };
+
+      const modal = document.getElementById("legal-modal");
+      const modalTitle = document.getElementById("modal-heading");
+      const modalBody = document.getElementById("modal-body");
+      const cta = document.getElementById("cta-link");
+      const heroImage = document.querySelector("[data-fallback='true']");
+
+      function preserveUrlParams() {
+        const currentParams = window.location.search;
+
+        if (!currentParams || !cta) return;
+
+        const destination = new URL(cta.getAttribute("href"), window.location.href);
+        const sourceParams = new URLSearchParams(currentParams);
+
+        sourceParams.forEach((value, key) => {
+          destination.searchParams.set(key, value);
+        });
+
+        cta.href = destination.pathname + destination.search + destination.hash;
+      }
+
+      function replaceBrokenImage() {
+        if (!heroImage) return;
+
+        heroImage.addEventListener("error", () => {
+          const fallback = document.createElement("div");
+          fallback.className = "image-fallback";
+          fallback.innerHTML = "<span>🙏</span>";
+          heroImage.replaceWith(fallback);
+        });
+      }
+
+      function openModal(type) {
+        const selectedContent = pageContent[type];
+
+        if (!selectedContent) return;
+
+        modalTitle.textContent = selectedContent.title;
+        modalBody.innerHTML = selectedContent.html;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("click", (event) => {
+        const opener = event.target.closest("[data-modal-open]");
+        const closer = event.target.closest("[data-modal-close]");
+
+        if (opener) {
+          event.preventDefault();
+          openModal(opener.dataset.modalOpen);
+        }
+
+        if (closer) {
+          closeModal();
+        }
+
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+          closeModal();
+        }
+      });
+
+      replaceBrokenImage();
+      preserveUrlParams();
+    })();
+  </script>
+</body>
+
+</html>
